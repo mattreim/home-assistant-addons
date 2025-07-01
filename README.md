@@ -1,14 +1,16 @@
 # Mattreim's Home Assistant Add-on repository
 
-This repository can be used as a "blueprint" for add-on development to help you get started.
+#### Installation:
 
-Add-on documentation: <https://developers.home-assistant.io/docs/add-ons>
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmattreim%2Fhome-assistant-addons)
 
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=http%3A%2F%2Fgithub.com%2Fmattreim%2Fhome-assistant-addons)
-
+###### If you want to add the repository manually, use the following URL: <br>
+```
+https://github.com/mattreim/home-assistant-addons
+```
 ## Add-ons
 
-This repository contains the following add-ons
+###### This repository contains the following add-ons
 
 ### <img src="deconz-latest/icon.png" width="18px"> [deCONZ (latest)](./deconz-latest)
 
@@ -18,7 +20,7 @@ This repository contains the following add-ons
 ![Supports armv7 Architecture][armv7-shield]
 ![Supports i386 Architecture][i386-shield]
 
-Control a Zigbee network using ConBee or RaspBee hardware by Dresden Elektronik.
+#### Control a Zigbee network using ConBee or RaspBee hardware by dresden elektronik.
 
 <!--
 
