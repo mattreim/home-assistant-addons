@@ -1,9 +1,9 @@
 ---
-version: v2.30.2
+version: v2.31.0-beta
 slug: deconz_latest
 name: deCONZ (latest)
 description: >-
-  Control a Zigbee network with ConBee or RaspBee by Dresden Elektronik
+  Control a Zigbee network with ConBee or RaspBee by dresden elektronik
 url: https://github.com/mattreim/home-assistant-addons/tree/main/deconz-latest
 apparmor: false
 arch:

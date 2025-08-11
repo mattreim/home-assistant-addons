@@ -4,9 +4,11 @@
 
 Follow these steps to get the add-on installed on your system:
 
-1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
-2. Find the "deCONZ" add-on and click it.
-3. Click on the "INSTALL" button.
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store** -> **Three dots menu** -> **Repositories**. <br>
+   Or click the Home Assistant My button to open the link on your repositories page.
+2. Add repository URL and click "CLOSE".
+3. Find the "deCONZ (latest)" add-on and click it.
+4. Click on the "INSTALL" button.
 
 ## How to use
 
@@ -28,27 +30,27 @@ The add-on needs to know where your ConBee/RaspBee can be found, and therefore,
 you'll need to configure the add-on to point to the right device.
 
 If you're using Home Assistant you may find the correct value for this on the
-`Settings -> System -> Hardware` page. It is recommended
+`Settings -> System -> Hardware -> All hardware` page. It is recommended
 to use a "by-id" path to the device if one exists, as it is not subject to
 change if other devices are added to the system.
 
-1. Replace `null` in the `device` option in the add-on configuration and specify
-   the device name in quotes: e.g. something like
+1. Replace `null` in the `devices` option in the add-on configuration and specify
+   the device name in quotes: e.g. something like <br>
    `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"`,
-   `"/dev/ttyUSB0"`, `"/dev/ttyAMA0"`, or `"/dev/ttyACM0"`.
+   `"/dev/ttyUSB0"`, `"/dev/ttyAMA0"` or `"/dev/ttyACM0"`.
 2. Click on "SAVE" to save the add-on configuration.
 3. Toggle the "Show in sidebar" to add it to your Home Assistant side bar.
 4. Start the add-on.
 
-After installing and starting this add-on, access the deCONZ WebUI ("Phoscon")
-with "WEB UI" button.
+After installing and starting this add-on, you can use the “deCONZ” button to access the
+deCONZ GUI via VNC or the “Phoscon” button to configure further settings in the Phoscon app.
 
 ## Configuring the Home Assistant deCONZ integration
 
 By default, Home Assistant has the `discovery` integration enabled, which
 automatically discovers this add-on.
 
-Navigate to **Settings** -> **Devices & Services** -> **Integrations** page after starting this
+Navigate in Home Assistant to **Settings** -> **Devices & Services** -> **Integrations** page after starting this
 add-on to configure the deCONZ integration.
 
 In case you don't have `discovery` enabled on your Home Assistant instance,
@@ -58,8 +60,8 @@ follow these instructions to configure the deCONZ integration:
 
 ## Migrating to this Add-on
 
-To migrate deCONZ to Home Assistant and this add-on, backup your deCONZ config via the
-Phoscon WebUI, then restore that config after installing/reinstalling.
+To migrate deCONZ to Home Assistant and this add-on, back up your configuration via
+the Phoscon app and restore it after installation/reinstallation.
 
 **_You must perform these steps or your Light, Group names and other data will be lost!_**
 
@@ -89,10 +91,9 @@ settings.
 
 ## Upgrading RaspBee and ConBee firmware
 
-This add-on allows you to upgrade your firmware straight from the Phoscon
-web interface with ease.
+This add-on allows you to upgrade your firmware straight from the Phoscon App with ease.
 
-Go to "Settings -> Gateway" and click the upgrade button.
+Go in Phoscon to `Settings -> Gateway` and click the upgrade button.
 
 However, some USB sticks (like the Aeotec Z-Wave sticks), can interfere with
 the upgrade process, causing the firmware upgrade to fail silently. If you end
@@ -107,12 +108,12 @@ Some add-ons are capable of consuming the deCONZ API directly. Node-RED is
 one of those applications, that is available as an add-on, that can
 consume the deCONZ API using the `node-red-contrib-deconz` node.
 
-**WARNING** Do not use the following settings to set up a integration manually
+**WARNING:** Do not use the following settings to set up a integration manually
 from within Home Assistant!
 
 To allow these add-ons to connect to deCONZ, use the following settings:
 
-- **Host**: `core-deconz`
+- **Host**: `xxxxxxxx-deconz-latest`
 - **(API) Port**: `40850`
 - **WebSocket Port**: `8081`
 
@@ -149,18 +150,19 @@ Add-on configuration:
 device: /dev/ttyAMA0
 ```
 
-### Option: `device` (required)
+### Option: `devices` (required)
 
 The device address of your ConBee/RaspBee.
 
 If you're using Home Assistant you may find the correct value for this on the
-`Supervisor -> System -> Host system -> Hardware` page. It is recommended
+`Settings -> Hardware -> All hardware` page. It is recommended
 to use a "by-id" path to the device if one exists, as it is not subject to
 change if other devices are added to the system.
 
 In most cases this looks like one of the following:
 
-- `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"` (and similar for RaspBee and the original ConBee, replace `XXXXXXXX` with the value you see in your above mentioned hardware page)
+- `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"` <br> 
+   (and similar for RaspBee and the original ConBee, replace `XXXXXXXX` with the value you see in your above mentioned hardware page)
 - `"/dev/ttyUSB0"`
 - `"/dev/ttyAMA0"`
 - `"/dev/ttyACM0"`
@@ -179,15 +181,14 @@ fails to communicate new settings to Home Assistant.
 
 This can be solved by the following steps:
 
-1. Backup your deCONZ data, by going into the Web UI, from the menu choose:
-  **Settings** -> **Gateway** -> **Backup Option** button, next create
+1. Backup your deCONZ/Phoscon data, by going into the Phoscon App, from the menu choose:
+  **Settings** -> **Gateway** -> **Backup options** button, next create
   a new backup and download it onto your computer.
 2. Uninstall the add-on.
 3. In Home Assistant, remove the current integration you have for deCONZ.
 4. Restart Home Assistant.
 5. Install the deCONZ add-on again, and configure it again according to the [instructions](#configure-the-add-on).
-6. Restore the backup you created at the first step at the same location
-   in the Web UI as before.
+6. Restore the backup you created at the first step at the same location in the Phoscon App as before.
 7. Restart the add-on and next, restart Home Assistant once more.
 8. Follow the instructions on [setting up the deCONZ integration](#configuring-the-home-assistant-deconz-integration).
 
@@ -232,7 +233,7 @@ In case you've found a bug, please [open an issue on our GitHub][issue].
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io
-[issue]: https://github.com/mattreim/hassio-addons/issues
+[issue]: https://github.com/mattreim/home-assistant-addons/issues
 [manual-upgrade]: https://github.com/dresden-elektronik/deconz-rest-plugin/wiki/Update-deCONZ-manually
 [reddit]: https://reddit.com/r/homeassistant
 [vnc-viewer]: https://bintray.com/tigervnc/stable/tigervnc/
