@@ -2,7 +2,7 @@
 # vim: ft=bash
 # shellcheck shell=bash
 # ==============================================================================
-# Download available firmware update for OSRAM Ledvance
+# Download available firmware update for OSRAM LEDVANCE
 # ==============================================================================
 readonly URL_OSRAM="https://api.update.ledvance.com/v1/zigbee/firmwares"
 
@@ -13,7 +13,7 @@ bashio::log.info "Running the OSRAM LEDVANCE OTA updater..."
 
 # fetch data
 if ! OSRAM_DATA="$(curl -sL ${URL_OSRAM})"; then
-    bashio::log.info "Can't fetch data from OSRAM!"
+    bashio::log.info "Can't fetch data from osram!"
     exec sleep 18000
 fi
 

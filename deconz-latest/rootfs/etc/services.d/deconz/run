@@ -37,7 +37,7 @@ export DISPLAY=":0"
 
 bashio::log.info "Starting VNC server (local/${LOCAL_ONLY})..."
 tigervncserver \
-    -name "Home Assistant - deCONZ" \
+    -name "Home Assistant - deCONZ (latest)" \
     -geometry 1920x1080 \
     -depth 16 \
     -localhost ${LOCAL_ONLY} \

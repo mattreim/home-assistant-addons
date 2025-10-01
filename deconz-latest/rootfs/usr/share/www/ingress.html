@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>deCONZ | dresden elektronik</title>
     <style>
       :root {
         /* Home Assistant Light Theme */
@@ -18,9 +22,12 @@
 
         --button-bg: #009AC7;
         --button-text-color: #fff;
+        --button-hover-color: #006787;
 
         --link-color: var(--primary-color);
         --link-hover-color: #007aa3;
+
+        --focus-color: #989898;
 
         --border-radius: 12px;
         --shadow: 0 1px 4px rgba(0,0,0,0.06);
@@ -42,9 +49,12 @@
 
           --button-bg: #009AC7;
           --button-text-color: #fff;
+          --button-hover-color: #006787;
 
           --link-color: var(--primary-color);
           --link-hover-color: #007aa3;
+
+          --focus-color: #989898;
 
           --border-radius: 12px;
           --shadow: 0 1px 4px rgba(0,0,0,0.18);
@@ -77,7 +87,7 @@
       .toolbar h1 {
         margin: 0 0 0 60px;
         font-size: 20px;
-        font-weight: 500;
+        font-weight: 400;
       }
       .content {
         flex-grow: 1;
@@ -112,6 +122,11 @@
         color: var(--link-hover-color);
         text-decoration: none;
       }
+      a:focus-visible {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
       .button-row {
         display: flex;
         gap: 16px;
@@ -140,8 +155,21 @@
         outline: none;
         text-decoration: none;
       }
+      .mdc-button:focus {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
+      }
+      .mdc-button:focus-visible {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 3px rgba(3,169,244,0.35);
+      }
+      .mdc-button:focus:not(:focus-visible) {
+        outline: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      }
       .mdc-button:hover {
-        background-color: #006787;
+        background-color: var(--button-hover-color);
         color: var(--button-text-color);
         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       }
@@ -159,10 +187,24 @@
           opacity: 0;
         }
       }
-      .mdc-button:active::after {
-        transform: scale(1.8);
-        opacity: 0.6;
-        transition: 0s;
+      @media (prefers-reduced-motion: reduce) {
+        .ripple { display: none !important; }
+        .mdc-button { transition: none !important; }
+      }
+      @media (forced-colors: active) {
+        .mdc-button {
+          background: ButtonFace;
+          color: ButtonText;
+          border: 1px solid CanvasText;
+        }
+        .mdc-button:hover {
+          background: Highlight; 
+          color: HighlightText; 
+        }
+        .mdc-button:focus {
+          outline: 2px solid Highlight; 
+          outline-offset: 2px; 
+        }  
       }
       @media (max-width: 480px) {
         .card {
@@ -193,9 +235,9 @@
         <div class="card">
           <p>
             You can use the
-            <a href="https://phoscon.de/en/conbee/software#phoscon-app" target="_blank" rel="noreferrer">Phoscon App</a>
+            <a href="https://phoscon.de/en/conbee/software#phoscon-app" target="_blank" rel="noopener noreferrer">Phoscon App</a>
             or the
-            <a href="https://phoscon.de/en/conbee/software#deconz" target="_blank" rel="noreferrer">deCONZ GUI</a>
+            <a href="https://phoscon.de/en/conbee/software#deconz" target="_blank" rel="noopener noreferrer">deCONZ GUI</a>
             through VNC.
           </p>
           <div class="button-row">
@@ -213,8 +255,14 @@
           const rect = button.getBoundingClientRect();
           const size = Math.max(rect.width, rect.height);
           ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
-          ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+          const isKeyboard = (e.detail === 0 && e.clientX === 0 && e.clientY === 0);
+          const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+          const xRel = isKeyboard ? rect.width / 2 : (e.clientX - rect.left);
+          const yRel = isKeyboard ? rect.height / 2 : (e.clientY - rect.top);
+          const x = clamp(xRel, 0, rect.width);
+          const y = clamp(yRel, 0, rect.height);
+          ripple.style.left = (x - size / 2) + 'px';
+          ripple.style.top = (y - size / 2) + 'px';
           button.appendChild(ripple);
           setTimeout(() => ripple.remove(), 600);
         });

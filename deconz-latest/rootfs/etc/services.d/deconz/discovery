@@ -6,7 +6,6 @@
 # ==============================================================================
 declare api_key
 declare config
-declare query
 declare retries
 declare serial
 
@@ -30,6 +29,11 @@ for i in $(seq 1 30); do
     fi
     sleep 1
 done
+
+if [ "$i" -eq 30 ]; then
+    bashio::log.error "deCONZ API is not reachable after 30 seconds – stopping discovery."
+    exit 0
+fi
 
 # Locate database
 DATA_STORE="/data/.local/share/deCONZ/zll.db"
@@ -69,7 +73,7 @@ if ! bashio::var.has_value "${api_key}"; then
             "http://${TARGET_IP}:${API_PORT}/api")"; then
             api_key="$(bashio::jq "${result}" '.[0].success.username')"
             if bashio::var.has_value "${api_key}"; then
-                bashio::log.info "API key successfully created after ${i} seconds: ${api_key}"
+                bashio::log.info "API key successfully created after ${i} seconds."
                 break
             fi
         fi
@@ -88,10 +92,16 @@ while [[ "${serial}" = "0000000000000000" && "${retries}" -gt 0 ]]; do
     sleep 5
     if result="$(curl --silent --show-error \
         --request GET "http://${TARGET_IP}:${API_PORT}/api/${api_key}/config")"; then
-        serial="$(bashio::jq "${result}" '.bridgeid')"
+        candidate="$(bashio::jq "${result}" '.bridgeid')"
+        if [[ "$candidate" =~ ^[0-9A-Fa-f]{16}$ ]]; then
+            serial="$candidate"
+        else
+            serial="0000000000000000"
+        fi
     fi
     ((retries--))
 done
+
 if [[ "${serial}" = "0000000000000000" ]]; then
     bashio::log.error "Failed to get a valid bridge ID – continuing without discovery."
     exit 0
