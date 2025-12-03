@@ -1,5 +1,5 @@
 ---
-version: v2.31.2
+version: v2.32.2-beta
 slug: deconz_latest
 name: deCONZ (latest)
 description: >-
@@ -25,6 +25,10 @@ init: false
 kernel_modules: true
 options:
   device: null
+  ota_update:
+    bosch: false
+    ikea: false
+    ledvance: false
 panel_icon: mdi:zigbee
 ports:
   40850/tcp: null
@@ -34,11 +38,19 @@ privileged:
   - SYS_RAWIO
 schema:
   device: device(subsystem=tty)
-  dbg_aps: int?
-  dbg_info: int?
-  dbg_otau: int?
-  dbg_zcl: int?
-  dbg_zdp: int?
+  ota_update:
+    bosch: bool
+    ikea: bool
+    ledvance: bool
+  dbg_info: int(0,2)?
+  dbg_aps: int(0,2)?
+  dbg_zcl: int(0,1)?
+  dbg_zdp: int(0,1)?
+  dbg_ddf: int(0,1)?
+  dbg_dev: int(0,1)?
+  dbg_ota: int(0,1)?
+  dbg_error: int(0,2)?
+  dbg_http: int(0,1)?
 startup: services
 udev: true
 usb: true

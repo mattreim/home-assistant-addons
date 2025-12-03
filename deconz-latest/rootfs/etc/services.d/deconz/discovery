@@ -9,7 +9,7 @@ declare config
 declare retries
 declare serial
 
-bashio::log.info "Starting discovery script ..."
+bashio::log.info "Starting discovery script..."
 
 # Remove old discovery data storage (cleanup)
 # We now query the deCONZ database for it directly.

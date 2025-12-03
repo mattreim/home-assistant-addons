@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.32.2-beta
+
+- Bump deCONZ to v2.32.2 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.32.2-beta)]
+- Add configurable OTA update switches for Bosch, IKEA and OSRAM/LEDVANCE (default is off)
+- Add Bosch Smart Home OTA update script (Official repo)
+- Add more debug options
+
 ## v2.31.2
 
 - Bump deCONZ to v2.31.2 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.31.2)]
