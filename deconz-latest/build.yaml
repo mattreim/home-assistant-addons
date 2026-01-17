@@ -9,5 +9,5 @@ labels:
   org.opencontainers.image.source: "https://github.com/mattreim/home-assistant-addons"
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
-  DECONZ_VERSION: 2.32.2
+  DECONZ_VERSION: 2.32.4
   RELEASE_CHANNEL: beta
