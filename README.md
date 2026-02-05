@@ -1,4 +1,4 @@
-# Mattreim's Home Assistant Add-on repository
+# Mattreim's Home Assistant App repository
 
 #### Installation:
 
@@ -8,9 +8,9 @@
 ```
 https://github.com/mattreim/home-assistant-addons
 ```
-## Add-ons
+## Apps
 
-###### This repository contains the following add-ons
+###### This repository contains the following apps
 
 ### <img src="deconz-latest/icon.png" width="18px"> [deCONZ (latest)](./deconz-latest)
 
@@ -25,7 +25,7 @@ https://github.com/mattreim/home-assistant-addons
 <!--
 
 Notes to developers after forking or using the github template feature:
-- While developing comment out the 'image' key from 'example/config.yaml' to make the supervisor build the addon
+- While developing comment out the 'image' key from 'example/config.yaml' to make the supervisor build the app
   - Remember to put this back when pushing up your changes.
 - When you merge to the 'main' branch of your repository a new build will be triggered.
   - Make sure you adjust the 'version' key in 'example/config.yaml' when you do that.

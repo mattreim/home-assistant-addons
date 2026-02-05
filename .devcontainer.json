@@ -1,5 +1,5 @@
 {
-  "name": "Home Assistant Add-on repository",
+  "name": "Home Assistant App repository",
   "image": "ghcr.io/home-assistant/devcontainer:2-addons",
   "appPort": ["7123:8123", "7357:4357"],
   "postStartCommand": "bash devcontainer_bootstrap",

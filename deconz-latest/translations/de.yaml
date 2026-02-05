@@ -34,7 +34,7 @@ configuration:
         name: OSRAM/LEDVANCE
 network:
   40850/tcp: >-
-    deCONZ API-Backend (Zugang für Phoscon und REST-API außerhalb des Add-ons)
+    deCONZ API-Backend (Zugang für Phoscon und REST-API außerhalb der App)
   5900/tcp: >-
     deCONZ über VNC (Zugriff auf die GUI mit externer
     VNC-Software. Nicht gesichert!)
