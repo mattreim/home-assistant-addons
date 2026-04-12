@@ -1,13 +1,19 @@
 # Changelog
 
+## v2.33.0-beta
+
+- Bump deCONZ to v2.33.0 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.0-beta)]
+- Align ingress colors with Home Assistant (toolbar color)
+
 ## v2.32.5
 
 - Bump deCONZ to v2.32.5 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.32.5)]
+- Renaming from add-on to app
 
 ## v2.32.4-beta
 
 - Bump deCONZ to v2.32.4 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.32.4-beta)]
-- Align ingress colors with Home Assistant
+- Align ingress colors with Home Assistant (link color)
 
 ## v2.32.2-beta
 

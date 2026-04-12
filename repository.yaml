@@ -1,5 +1,5 @@
 ---
-# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
-name: Mattreim's Home Assistant App repository
+# https://developers.home-assistant.io/docs/apps/repository#repository-configuration
+name: Mattreim's Home Assistant app repository
 url: 'https://github.com/mattreim/home-assistant-addons'
 maintainer: Mattreim <mail+github@mattreim.de>
