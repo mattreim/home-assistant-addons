@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.33.0-trial (Do not install trial version)
+
+- Avoid generating additional API keys upon HTTP 404 errors
+
 ## v2.33.0-beta
 
 - Bump deCONZ to v2.33.0 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.0-beta)]
