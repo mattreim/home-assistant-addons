@@ -4,7 +4,7 @@
 
 Follow these steps to get the app (formerly known as add-on) installed on your system:
 
-1. Navigate in your Home Assistant frontend to **Settings** -> **App** -> **App store** -> **Three dots menu** -> **Repositories**. <br>
+1. Navigate in your Home Assistant frontend to **Settings** -> **App** -> **Install app** -> **Three dots menu** -> **Repositories**. <br>
    Or click the Home Assistant My button to open the link on your repositories page.
 2. Add repository URL and click "CLOSE".
 3. Find the "deCONZ (latest)" app and click it.
@@ -30,7 +30,7 @@ The app needs to know where your ConBee/RaspBee can be found, and therefore,
 you'll need to configure the app to point to the right device.
 
 If you're using Home Assistant you may find the correct value for this on the
-**Settings** -> **System** -> **Hardware** -> **All hardware** page. It is recommended
+**Settings** -> **System** -> **Hardware** -> **System hardware** page. It is recommended
 to use a "by-id" path to the device if one exists, as it is not subject to
 change if other devices are added to the system.
 
@@ -158,7 +158,7 @@ device: /dev/ttyAMA0
 The device address of your ConBee/RaspBee.
 
 If you're using Home Assistant you may find the correct value for this on the
-**Settings** -> **System** -> **Hardware** -> **All hardware** page. It is recommended
+**Settings** -> **System** -> **Hardware** -> **System hardware** page. It is recommended
 to use a "by-id" path to the device if one exists, as it is not subject to
 change if other devices are added to the system.
 
@@ -171,6 +171,19 @@ In most cases this looks like one of the following:
 - `"/dev/ttyACM0"`
 
 ## Troubleshooting
+
+### Many API keys in Phoscon App
+
+Over time, a number of API keys may accumulate that you might wish to remove manually. You can find the information required to do this under **Help** -> **API Information** -> **Configuration**. For Home Assistant, only a single API key named `Home Assistant` (or `pydeconz` if you are running deCONZ outside of Home Assistant) is required. To accomplish this, for example, install the `Advanced SSH & Web Terminal` app in Home Assistant and send the following command to the API to remove the key.
+
+- **IP**: `Phoscon IP`
+- **(API) Port**: `40850`
+- **apikey**: `Phoscon API key`
+- **apikey2**: `API Key to remove`
+
+```yaml
+curl --request DELETE "http://<IP>:<(API) Port>/api/<apikey>/config/whitelist/<apikey2>"
+```
 
 ### My gateway shows up in Home Assistant with ID 0000000000000000
 

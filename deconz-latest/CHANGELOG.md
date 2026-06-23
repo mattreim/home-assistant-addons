@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.33.1-beta
+
+- Bump deCONZ to v2.33.1 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.1-beta)]
+- Avoid generating additional API keys upon HTTP/JSON errors
+- Update DOCS.md with an explanation for manual API key removal
+
 ## v2.33.0-beta
 
 - Bump deCONZ to v2.33.0 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.0-beta)]
