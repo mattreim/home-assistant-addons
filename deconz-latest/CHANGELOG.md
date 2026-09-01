@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.33.2 trial version 2
+
+- Upgrade base image from bookworm to trixie
+- Fix timestamps in log messages during shutdown
+
 ## v2.33.2
 
 - Bump deCONZ to v2.33.2 [[CHANGELOG](https://github.com/dresden-elektronik/deconz-rest-plugin/releases/tag/v2.33.2)]
