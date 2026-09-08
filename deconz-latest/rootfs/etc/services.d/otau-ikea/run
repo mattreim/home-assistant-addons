@@ -4,7 +4,7 @@
 # ==============================================================================
 # Download available firmware update for IKEA
 # ==============================================================================
-readonly URL_IKEA="http://fw.ota.homesmart.ikea.net/feed/version_info.json"
+readonly URL_IKEA="https://fw.ota.homesmart.ikea.com/DIRIGERA/version_info.json"
 
 # Ensure OTAU folder exists
 mkdir -p "/data/otau"
@@ -12,25 +12,32 @@ mkdir -p "/data/otau"
 bashio::log.info "Running the IKEA OTA updater..."
 
 # Fetch IKEA firmware data
-if ! IKEA_DATA="$(curl -sL ${URL_IKEA})"; then
+if ! IKEA_DATA="$(curl -kfsSL "${URL_IKEA}")"; then
     bashio::log.warning "⚠️ Can't fetch data from IKEA — retry in 5 hours."
     exec sleep 18000
 fi
 
 # Process each firmware entry
 IKEA_DATA_SIZE="$(echo "${IKEA_DATA}" | jq --raw-output '. | length')"
-for (( i=0; i < IKEA_DATA_SIZE; i++ )); do
-    OTAU_URL=$(echo "${IKEA_DATA}" | jq --raw-output ".[$i].fw_binary_url // empty")
-    OTAU_FILE="/data/otau/${OTAU_URL##*/}"
+for (( i=0; i<IKEA_DATA_SIZE; i++ )); do
+    OTAU_URL="$(echo "${IKEA_DATA}" | jq --raw-output \
+        ".[$i].fw_binary_url // empty")"
 
     # Skip empty URLs
     [[ -z "${OTAU_URL}" ]] && continue
+
+    OTAU_FILE="/data/otau/${OTAU_URL##*/}"
 
     # Skip already downloaded files
     [[ -f "${OTAU_FILE}" ]] && continue
 
     # Download firmware
-    curl -s -L -o "${OTAU_FILE}" "${OTAU_URL}"
+    if curl -kfsSL -o "${OTAU_FILE}.tmp" "${OTAU_URL}"; then
+        mv "${OTAU_FILE}.tmp" "${OTAU_FILE}"
+    else
+        rm -f "${OTAU_FILE}.tmp"
+        bashio::log.warning "Failed to download: ${OTAU_FILE##*/}"
+    fi
 done
 
 exec sleep 266400 # Sleep for 3 days 2 hours before next check
