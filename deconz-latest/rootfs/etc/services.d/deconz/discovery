@@ -36,10 +36,9 @@ if [ "$i" -eq 30 ]; then
 fi
 
 # Locate database
-DATA_STORE="/data/.local/share/deCONZ/zll.db"
+DATA_STORE="/data/.local/share/dresden-elektronik/deCONZ/zll.db"
 if [ ! -f "$DATA_STORE" ]; then
-    bashio::log.warning "Database not found at $DATA_STORE, trying alternative path..."
-    DATA_STORE="/data/.local/share/dresden-elektronik/deCONZ/zll.db"
+    DATA_STORE="/data/.local/share/deCONZ/zll.db"
     if [ ! -f "$DATA_STORE" ]; then
         bashio::log.error "No database found in either path! Proceeding without serial."
         DATA_STORE=""
@@ -95,7 +94,7 @@ if ! bashio::var.has_value "${api_key}"; then
 
                 # Successful
                 if bashio::var.has_value "${api_key}"; then
-                    bashio::log.info "API key successfully created after ${i} seconds."
+                    bashio::log.info "API key successfully created."
                     break
                 fi
 

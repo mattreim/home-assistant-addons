@@ -3,6 +3,7 @@
 # ==============================================================================
 # Custom S6 stage2 hook — runs before services.d start
 # ==============================================================================
+
 if ! bashio::config.true 'ota_update.bosch'; then
     bashio::log.info "Bosch OTA update is disabled."
     rm -rf /etc/services.d/otau-bosch
