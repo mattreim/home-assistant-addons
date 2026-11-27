@@ -4,14 +4,18 @@
 # ==============================================================================
 # Start deCONZ service
 # ==============================================================================
+
 TMP_FOLDER=$(mktemp -d)
+
+# tigervnc >= 1.13 migrates ~/.vnc to ~/.config/tigervnc, which needs ~/.config to exist
+mkdir -p /data/.config
 
 # Lookup udev link
 DECONZ_DEVICE=$(bashio::config 'device')
 
 # VNC is not enabled as a separate service, as it cannot handle multiple
 # session when running in the foreground.
-VNC_PORT="$(bashio::addon.port 5900)"
+VNC_PORT="$(bashio::app.port 5900)"
 ARCH="$(bashio::info.arch)"
 
 # Fix tigervnc for 32 bits ARM
@@ -43,18 +47,17 @@ tigervncserver \
     -localhost ${LOCAL_ONLY} \
     -SecurityTypes None \
     --I-KNOW-THIS-IS-INSECURE \
-    "${DISPLAY}" \
-    &> /dev/null
+    "${DISPLAY}"
 
 # Wait for VNC server to start before continuing
 bashio::log.info "deCONZ waiting for VNC to start"
 bashio::net.wait_for 5900
 
 # Delete unused key
-options=$(bashio::addon.options)
+options=$(bashio::app.options)
 if bashio::jq.exists "${options}" ".dbg_otau"; then
     bashio::log.info "Removing dbg_otau"
-    bashio::addon.option "dbg_otau"
+    bashio::app.option "dbg_otau"
 fi
 
 # Load debug values
