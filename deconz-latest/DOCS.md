@@ -114,7 +114,7 @@ To allow these apps to connect to deCONZ, use the following settings:
 
 - **Host**: `xxxxxxxx-deconz-latest`
 - **(API) Port**: `40850`
-- **WebSocket Port**: `8081`
+- **Websocket Port**: `8081`
 
 _Note: The above settings are likely to change in a future update of this app._
 
